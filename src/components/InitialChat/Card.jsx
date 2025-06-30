@@ -29,7 +29,7 @@ export default function Card({ heading, subtext, handleClick }) {
             <Box>
                 <Typography
                     variant='heading'
-                    fontWeight={700}
+                    fontWeight={800}
                     fontSize={{xs:14,md:20}}
                 >
                     {heading}

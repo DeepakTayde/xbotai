@@ -19,7 +19,7 @@ export default function Home() {
   const { chat, setChat } = useOutletContext();
   const { mode } = useContext(ThemeContext);
 
-  // GENERATING AI RESPONSE
+
   const generateResponse = (input) => {
     const response = data.find(
       (item) => input.toLowerCase() === item.question.toLowerCase()
@@ -50,16 +50,16 @@ export default function Home() {
     setChatId((prev) => prev + 2);
   };
 
-  //AUTOSCROLL TO LAST ELEMENT
+
   useEffect(() => {
     listRef.current?.lastElementChild?.scrollIntoView();
   }, [scrollToBottom]);
 
   return (
-    <Stack
-      height={"100vh"}
+    <Stack flex={1} minHeight={0}
       justifyContent={"space-between"}
       sx={{
+    
         "@media (max-width:767px)": {
           background:
             mode === "light" ? "linear-gradient(#F9FAFA 60%, #EDE4FF)" : "",
@@ -72,8 +72,8 @@ export default function Home() {
 
       {chat.length > 0 && (
         <Stack
-          height={1}
-          flexGrow={0}
+          flex={1}
+          overflow={'auto'}
           p={{ xs: 2, md: 3 }}
           spacing={{ xs: 2, md: 3 }}
           sx={{
@@ -111,12 +111,15 @@ export default function Home() {
         clearChat={() => setChat([])}
       />
 
-      <FeedbackModal
+      {showModal &&(
+              <FeedbackModal
         open={showModal}
         updateChat={setChat}
         chatId={selectedChatId}
         handleClose={() => setShowModal(false)}
       />
+
+      )}
     </Stack>
   );
 }
