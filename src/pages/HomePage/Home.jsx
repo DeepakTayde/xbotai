@@ -81,7 +81,7 @@ export default function Home() {
         {chat.length === 0 ? (
           <InitialChat generateResponse={generateResponse} />
         ) : (
-          <Stack spacing={{ xs: 2, md: 3 }} maxWidth='80vw'>
+          <Stack spacing={{ xs: 2, md: 3 }} maxWidth={{xs:1, md:'80vw'}}>
             {chat.map((item, index) => (
               <ChattingCard
                 details={item}

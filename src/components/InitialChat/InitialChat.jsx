@@ -35,19 +35,22 @@ export default function InitialChat({ generateResponse }) {
           borderRadius={"50%"}
         />
       </Stack>
-        <Box display='flex' justifyContent='center' alignItems={'center'}>
-              <Grid container spacing={{ xs: 1, md: 3 }}>
-        {quickChatData.map((item) => (
-          <Grid item key={item.heading} xs={12} md={6}>
-            <Card
-              heading={item.heading}
-              subtext={item.subtext}
-              handleClick={generateResponse}
-            />
-          </Grid>
-        ))}
-      </Grid>
-        </Box>
+      <Stack >
+        <Grid
+          container
+          spacing={{ xs: 1, md: 3 }}
+        >
+          {quickChatData.map((item) => (
+            <Grid item key={item.heading} xs={12} md={6}>
+              <Card
+                heading={item.heading}
+                subtext={item.subtext}
+                handleClick={generateResponse}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Stack>
     </Stack>
   );
 }
