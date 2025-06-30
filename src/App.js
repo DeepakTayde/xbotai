@@ -64,14 +64,16 @@ function App() {
               flexDirection: "column",
             }}
           >
-          <Box sx={{ flex: 1, overflowY: "auto" }}>            <Outlet
-              context={{
-                chat: chat,
-                setChat: setChat,
-                handleMobileMenu: setMenuOpen,
-              }}
-            /></Box>
-
+            <Box sx={{ flex: 1, overflowY: "auto" }}>
+              {" "}
+              <Outlet
+                context={{
+                  chat: chat,
+                  setChat: setChat,
+                  handleMobileMenu: setMenuOpen,
+                }}
+              />
+            </Box>
           </Grid>
         </Grid>
       </ThemeProvider>

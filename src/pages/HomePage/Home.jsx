@@ -19,7 +19,6 @@ export default function Home() {
   const { chat, setChat } = useOutletContext();
   const { mode } = useContext(ThemeContext);
 
-
   const generateResponse = (input) => {
     const response = data.find(
       (item) => input.toLowerCase() === item.question.toLowerCase()
@@ -50,16 +49,18 @@ export default function Home() {
     setChatId((prev) => prev + 2);
   };
 
-
   useEffect(() => {
     listRef.current?.lastElementChild?.scrollIntoView();
   }, [scrollToBottom]);
 
   return (
-    <Stack flex={1} minHeight={0}
-      justifyContent={"space-between"}
+    <Stack
+      direction="column"
+      spacing={0}
       sx={{
-    
+        height: "100%",
+        minHeight: 0,
+        overflow: "hidden",
         "@media (max-width:767px)": {
           background:
             mode === "light" ? "linear-gradient(#F9FAFA 60%, #EDE4FF)" : "",
@@ -68,42 +69,33 @@ export default function Home() {
     >
       <Navbar />
 
-      {chat.length === 0 && <InitialChat generateResponse={generateResponse} />}
+      {/* Chat messages container */}
+      <Box
+        sx={{
+          flex: 1,
+          overflowY: "auto",
+          p: { xs: 2, md: 3 },
+        }}
+        ref={listRef}
+      >
+        {chat.length === 0 ? (
+          <InitialChat generateResponse={generateResponse} />
+        ) : (
+          <Stack spacing={{ xs: 2, md: 3 }}>
+            {chat.map((item, index) => (
+              <ChattingCard
+                details={item}
+                key={index}
+                updateChat={setChat}
+                setSelectedChatId={setSelectedChatId}
+                showFeedbackModal={() => setShowModal(true)}
+              />
+            ))}
+          </Stack>
+        )}
+      </Box>
 
-      {chat.length > 0 && (
-        <Stack
-          flex={1}
-          overflow={'auto'}
-          p={{ xs: 2, md: 3 }}
-          spacing={{ xs: 2, md: 3 }}
-          sx={{
-            overflowY: "auto",
-            "&::-webkit-scrollbar": {
-              width: "10px",
-            },
-            "&::-webkit-scrollbar-track": {
-              boxShadow: "inset 0 0 8px rgba(0,0,0,0.1)",
-              borderRadius: "8px",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "rgba(151, 133, 186,0.4)",
-              borderRadius: "8px",
-            },
-          }}
-          ref={listRef}
-        >
-          {chat.map((item, index) => (
-            <ChattingCard
-              details={item}
-              key={index}
-              updateChat={setChat}
-              setSelectedChatId={setSelectedChatId}
-              showFeedbackModal={() => setShowModal(true)}
-            />
-          ))}
-        </Stack>
-      )}
-
+      {/* Chat input always visible at bottom */}
       <ChatInput
         generateResponse={generateResponse}
         setScroll={setScrollToBottom}
@@ -111,14 +103,13 @@ export default function Home() {
         clearChat={() => setChat([])}
       />
 
-      {showModal &&(
-              <FeedbackModal
-        open={showModal}
-        updateChat={setChat}
-        chatId={selectedChatId}
-        handleClose={() => setShowModal(false)}
-      />
-
+      {showModal && (
+        <FeedbackModal
+          open={showModal}
+          updateChat={setChat}
+          chatId={selectedChatId}
+          handleClose={() => setShowModal(false)}
+        />
       )}
     </Stack>
   );
