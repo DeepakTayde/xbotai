@@ -71,13 +71,13 @@ export default function Home() {
       {chat.length === 0 && <InitialChat generateResponse={generateResponse} />}
 
       {chat.length > 0 && (
-        <Grid
-          container
+        <Stack
+          height={1}
+          flexGrow={0}
           p={{ xs: 2, md: 3 }}
           spacing={{ xs: 2, md: 3 }}
           sx={{
             overflowY: "auto",
-            height: 1,
             "&::-webkit-scrollbar": {
               width: "10px",
             },
@@ -93,16 +93,15 @@ export default function Home() {
           ref={listRef}
         >
           {chat.map((item, index) => (
-            <Grid item xs={12} sm={6} key={index}>
-              <ChattingCard
-                details={item}
-                updateChat={setChat}
-                setSelectedChatId={setSelectedChatId}
-                showFeedbackModal={() => setShowModal(true)}
-              />
-            </Grid>
+            <ChattingCard
+              details={item}
+              key={index}
+              updateChat={setChat}
+              setSelectedChatId={setSelectedChatId}
+              showFeedbackModal={() => setShowModal(true)}
+            />
           ))}
-        </Grid>
+        </Stack>
       )}
 
       <ChatInput
