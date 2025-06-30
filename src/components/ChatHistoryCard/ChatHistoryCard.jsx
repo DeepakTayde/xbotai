@@ -19,7 +19,7 @@ export default function ChatHistoryCard({ details }) {
     }
 
     return (
-        <Box>
+        <Box maxWidth={{xs:1, md:'80vw'}}>
             <Typography
                 fontWeight={700}
                 mb={2}

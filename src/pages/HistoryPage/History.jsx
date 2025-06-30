@@ -71,7 +71,7 @@ export default function History() {
                 {filteredChats.length > 0 && (
                     <Stack
                         spacing={4}
-                        divider={<Divider sx={{ borderColor: 'primary.bg', opacity: 0.4 }} />}
+                        divider={<Divider sx={{ borderColor: 'primary.bg', opacity: 0.4 }}  />}
                     >
                         {filteredChats.map((item, index) => (
                             <ChatHistoryCard details={item} key={index} />
