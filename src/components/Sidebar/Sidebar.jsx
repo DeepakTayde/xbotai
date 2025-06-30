@@ -5,6 +5,7 @@ import icon from '../../assets/bot_ai_logo.png'
 import { Link } from 'react-router-dom'
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import CloseIcon from '@mui/icons-material/Close';
+import CreateIcon from '../../assets/create_icon.png'
 
 export default function Sidebar({ setChat, closeMenu }) {
 
@@ -71,7 +72,7 @@ export default function Sidebar({ setChat, closeMenu }) {
                         </Typography>
                     </Stack>
 
-                    <AddCommentIcon sx={{ color: 'text.primary' }} />
+                    <Box component={'img'} alt="create new chat icon" src={CreateIcon} sx={{ color: 'text.primary', width:'30px', height:'30px' }} />
 
                 </Stack>
             </Link>
