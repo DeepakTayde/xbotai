@@ -69,7 +69,7 @@ export default function Home() {
     >
       <Navbar />
 
-      {/* Chat messages container */}
+
       <Box
         sx={{
           flex: 1,
@@ -95,7 +95,7 @@ export default function Home() {
         )}
       </Box>
 
-      {/* Chat input always visible at bottom */}
+
       <ChatInput
         generateResponse={generateResponse}
         setScroll={setScrollToBottom}
